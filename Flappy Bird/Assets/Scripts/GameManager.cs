@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] Text scoreText;
     int score = 0;
     [SerializeField] GameObject gameOverScreen;
+    [SerializeField] GameObject flyButton;
 
     // Start is called before the first frame update
     void Start()
@@ -53,8 +54,6 @@ public class GameManager : MonoBehaviour
             yield return new WaitForSeconds(1);
             score = score + 1;
             scoreText.text = "Score : " + score;
-            //scoreText.text = "Score : " + (1 + Time.deltaTime);
-            //scoreText.text = "Score : " + Time.deltaTime * 1;
         }
         
     }
@@ -63,6 +62,7 @@ public class GameManager : MonoBehaviour
     {
         titleScreen.SetActive(false);
         player.SetActive(true);
+        flyButton.SetActive(true);
         StartGame();
     }
 

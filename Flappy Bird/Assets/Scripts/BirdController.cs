@@ -22,4 +22,9 @@ public class BirdController : MonoBehaviour
             birdRb.AddForce(Vector2.up * force, ForceMode2D.Impulse);
         }
     }
+
+    public void Fly()
+    {
+        birdRb.AddForce(Vector2.up * force, ForceMode2D.Impulse);
+    }
 }
