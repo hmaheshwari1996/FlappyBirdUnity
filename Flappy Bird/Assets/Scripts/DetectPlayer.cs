@@ -22,8 +22,7 @@ public class DetectPlayer : MonoBehaviour
     {
         if (collision.CompareTag("Bird"))
         {
-            gameManagerScript.isGameActive = false;
-            Debug.Log("Game Over!");
+            gameManagerScript.GameOver();
         }
     }
 }

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -12,13 +13,21 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject platformPrefab;
     [SerializeField] GameObject titleScreen;
     [SerializeField] GameObject player;
+    [SerializeField] Text scoreText;
+    int score = 0;
+    [SerializeField] GameObject gameOverScreen;
 
     // Start is called before the first frame update
+    void Start()
+    {
+
+    }
+        
     void StartGame()
     {
         isGameActive = true;
         StartCoroutine(SpawnPlatforms());
-        
+        StartCoroutine(Score());
     }
 
     // Update is called once per frame
@@ -37,10 +46,34 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    IEnumerator Score()
+    {
+        while (isGameActive)
+        {
+            yield return new WaitForSeconds(1);
+            score = score + 1;
+            scoreText.text = "Score : " + score;
+            //scoreText.text = "Score : " + (1 + Time.deltaTime);
+            //scoreText.text = "Score : " + Time.deltaTime * 1;
+        }
+        
+    }
+
     public void PlayGame()
     {
         titleScreen.SetActive(false);
         player.SetActive(true);
         StartGame();
+    }
+
+    public void GameOver()
+    {
+        isGameActive = false;
+        gameOverScreen.SetActive(true);
+    }
+
+    public void Restart()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }
